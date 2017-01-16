@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import division  # imports division from Python 3.6
-from random import randint
-from datetime import datetime
-#import sys
 
 
 def slope(dx, dy):
@@ -21,6 +18,12 @@ class ReturnValue(object):
 
     def __radd__(self, other):
         return self
+
+    def my_sum(returnValues):
+        result = ReturnValue(0, 100000000)
+        for rv in returnValues:
+            result = result + rv
+        return result
 
 
 class Point:
@@ -73,18 +76,6 @@ class Point:
         else:
             sign = '+'
         return 'y = {}x {} {}'.format(slope_local, sign, y_int)
-
-
-# coordinates generator
-def gen_coordinates(m, n):
-    seen = set()
-    x = randint(m, n)
-    while True:
-        seen.add(x)
-        yield (x)
-        x = randint(m, n)
-        while x in seen:
-            x = randint(m, n)
 
 
 # Function returns all possible lines
@@ -145,34 +136,6 @@ def final_result_faster_brute(points):
         # keeps all possible ways to remove all collinear points
         list_of_sets.append(final_result_faster_brute(difference))
 
-    presum = sum(list_of_sets)
-    presum.depth = presum.depth + 1
-    return presum
-
-
-g = gen_coordinates(0, 100)
-# f = gen_coordinates(1, )
-blabla = set([])
-
-blabla.add(Point(1, 5))
-blabla.add(Point(1, 1))
-blabla.add(Point(3, 3))
-blabla.add(Point(4, 4))
-#blabla.add(Point(2, 4))
-
-print (blabla)
-#solution_faster_brute(blabla)
-#print(solution_faster_brute(blabla))
-#print(len(solution_faster_brute(blabla)))
-#print(len(solution_brute(blabla)))
-
-
-startTime1 = datetime.now()
-print ('The amount of possible solutions with brute-force function: %i ' % final_result_brute(blabla).points)
-print (datetime.now() - startTime1)
-print ('How many lines you need to win: %i' % final_result_brute(blabla).depth)
-startTime2 = datetime.now()
-print ('The amount of possible solutions with modified brute-force function : %i' % final_result_faster_brute(blabla).points )
-print (datetime.now() - startTime2)
-print ('How many lines you need to win: %i' % final_result_faster_brute(blabla).depth)
-
+    pre_sum = sum(list_of_sets)
+    pre_sum.depth = pre_sum.depth + 1
+    return pre_sum
