@@ -66,17 +66,6 @@ class Point:
     def slope(self, target):
         return slope(target.x - self.x, target.y - self.y)
 
-    def line_equation(self, target):
-        slope_local = self.slope(target)
-        y_int = self.y_int(target)
-
-        if y_int < 0:
-            y_int = -y_int
-            sign = '-'
-        else:
-            sign = '+'
-        return 'y = {}x {} {}'.format(slope_local, sign, y_int)
-
 
 # Function returns all possible lines
 def solution_brute(points):
@@ -84,7 +73,7 @@ def solution_brute(points):
     for p1 in points:
         for p2 in points:
             line = p1.slope(p2)
-            s = {p1}  # set of collinear points ; {} for Python set literal
+            s = {p1}  # set of collinear points ; {} Python set literal
             for p in points:
                 if line == p1.slope(p):
                     s.add(p)

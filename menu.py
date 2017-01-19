@@ -59,8 +59,8 @@ def main():
         i=1
         while i < k+1:
             try:
-                x = input('Enter point[%i] x coordinate: ' %i)
-                y = input('Enter point[%i] y coordinate: ' %i)
+                x = input('Enter point[%i] x coordinate: ' % i)
+                y = input('Enter point[%i] y coordinate: ' % i)
                 i = i+1
                 test_points.add(brute.Point(x, y))
             except (ValueError, NameError):
@@ -82,16 +82,16 @@ def main():
     else:
         k = int(get_numeric())
         g = gen_coordinates(0, 100)
-
         i = 0
-        while i < 5:
+        while i < 10:
             i = i + 1
             test_points = set([])
             for n in range(0, k):
                 test_points.add(brute.Point(next(g), next(g)))
-                if brute.final_result_brute(test_points).points == brute.final_result_faster_brute(test_points).points:
-                    print("Test is passed")
-                else:
-                    print("Test is not passed")
+            if brute.final_result_brute(test_points).points == brute.final_result_faster_brute(test_points).points:
+                print("Test is passed")
+            else:
+                print("Test is not passed")
 
-main()
+if __name__ == "__main__":
+    main()
